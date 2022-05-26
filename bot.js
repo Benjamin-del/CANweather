@@ -9,7 +9,6 @@ const wtypes = require("./commands/types.js")
 const fs = require('fs');
 const configFile = require("./config/config.json")
 
-
 const client = new Client({
 	intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES]
 });
