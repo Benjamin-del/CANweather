@@ -19,7 +19,7 @@ html, body {
      width: 80%;
      padding: 1%;
     margin: auto;
-    border: 2px solid white;
+    border: 3px solid white;
     display: block;
      border-radius: 50px;
     text-align: center;
@@ -30,10 +30,15 @@ html, body {
      font-family: sans-serif;
      text-decoration: none !important;
 }
- p {
+ h1 {
     width: 100%;
     text-align: center;
     font-size: 24px;
     font-family: sans-serif;
     color: white;
 }
+
+
+p {color: white;font-family: sans-serif;text-align: center;}
+
+img {height: 60%;display: block;margin: auto;}

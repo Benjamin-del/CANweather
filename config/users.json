@@ -12,12 +12,18 @@
 					"name": "Ottawa (Richmond - Metcalfe)",
 					"code": "s0000623",
 					"prov": "ON"
+				},
+				{
+					"name": "Merritt",
+					"code": "s0000006",
+					"prov": "BC"
+				},
+				{
+					"name": "Port Alberni",
+					"code": "s0000294",
+					"prov": "BC"
 				}
 			]
-		},
-		{
-			"user": "6979480650925998699",
-			"locations": []
 		}
 	]
 }

@@ -5,7 +5,8 @@
   "main": "bot.js && web.js",
   "scripts": {
     "updateWeb": "node -e 'require(\"./update.js\").web()'",
-		"updateFile": "node -e 'require(\"./update.js\").file()'"
+		"updateFile": "node -e 'require(\"./update.js\").file()'",
+		"start":"node bot.js & node web.js"
   },
   "keywords": [],
   "author": "",

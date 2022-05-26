@@ -5,8 +5,9 @@ const fs = require('fs');
 const axios = require("axios")
 const process = require("process")
 const stlist = require("./config/locations.json")
-const config = require("./config/web.json")
-var PORT = 3000;
+const config = require("./config/config.json")
+const PORT = process.env.PORT || 3000;
+app.set('json spaces', 3);
 
 app.use(express.json())    
 app.use('/static', express.static('web-files'))
@@ -95,19 +96,26 @@ app.post('/user', async function(req, res) {
 	
 		const newobj = {
 			user : req.body.user,
-			locations : locations.slice(0, 5)
+			locations : locations.slice(0, 4)
 		}
 		newarr.unshift(newobj)
 
 		var newJs = {
 			u: newarr
 		}
-		 
+		
 		fs.writeFileSync('config/users.json', JSON.stringify(newJs, null, "\t"), "UTF-8", { 'flags': 'a' });
-		res.json({
-			status : "200 - OK",
+		const returndata = {
 			new_data : newobj
-		})
+		}
+	
+		if (locations.length > 4) {
+			Object.assign(returndata, {removed_data: locations.slice(4), status: "413 - TOO LONG"});
+		} else {
+			Object.assign(returndata, {status: "200 - OK"});
+		}
+		
+		res.json(returndata)
 })
 
 process.on('uncaughtException', function (err) {

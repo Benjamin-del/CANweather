@@ -6,7 +6,7 @@
 
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width">
-	<link rel="stylesheet" href="/static/login.css">
+	<link rel="stylesheet" href="/static/home.css">
 
 	<title>Benja Weather</title>
 </head>
@@ -14,9 +14,13 @@
 <body>
 	<div id="parent">
 		<div id="login">
-			<p>Benja Weather Bot</p>
-			<a href="https://discord.com/api/oauth2/authorize?client_id=976093548753588284&redirect_uri=https%3A%2F%2Fweather-bot.benja.ml%2Flogin&response_type=token&scope=identify">Login With Discord</a>	</div>
-		</div>
+			<h1>Benja Weather Bot</h1>
+			<a href="https://discord.com/api/oauth2/authorize?client_id=976093548753588284&redirect_uri=https%3A%2F%2Fweather-bot.benja.ml%2Flogin&response_type=token&scope=identify">Login With Discord</a>
+			<img src="/static/icon-white.png"></img>
+			<p id="client-status"></p>	
+	</div>
+	</div>
+	<script src="/static/home.js"></script>
 </body>
 
 </html>

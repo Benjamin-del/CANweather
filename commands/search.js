@@ -53,11 +53,11 @@ module.exports = {
 		return res
 	},
 	helper: async function (query) {
-
+		
 	const matching = []
 			const list = stlist.stations
 		  for (let i = 0; i < list.length; i++) {
-				if (list[i].name.includes(query)) {
+				if (list[i].name.toUpperCase().includes(query.toUpperCase())) {
 					matching.push(list[i])
 				}
 			}

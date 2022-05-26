@@ -1,4 +1,5 @@
 {
 	"url": "https://weather-bot.benja.ml",
-	"enabled":"true"
+	"enabled":"true",
+	"debug": false
 }

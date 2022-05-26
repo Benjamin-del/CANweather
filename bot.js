@@ -7,7 +7,9 @@ const search = require("./commands/search.js")
 const woptions = require("./commands/options.js")
 const wtypes = require("./commands/types.js")
 const fs = require('fs');
-const web = require("./config/web.json")
+const configFile = require("./config/config.json")
+
+
 const client = new Client({
 	intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES]
 });
@@ -18,16 +20,16 @@ const config = {
 }
 
 const searchslash = new SlashCommandBuilder()
-	.setName('search')
-	.setDescription('Search Weather stations')
+	.setName('weather')
+	.setDescription('Search Weather Locations')
 	.addStringOption(option =>
 		option.setName('search')
-			.setDescription('Search Weather stations')
+			.setDescription('Search Weather Locations')
 			.setRequired(true));
 
 const weatherslash = new SlashCommandBuilder()
-	.setName('saved')
-	.setDescription('Your Saved Stations.')
+	.setName('mylocations')
+	.setDescription('Your Saved Locations')
 
 const commands = [searchslash, weatherslash]
 commands.map(commands => searchslash.toJSON())
@@ -49,10 +51,10 @@ client.on('interactionCreate', async interaction => {
 	if (interaction.isCommand()) {
 		const { commandName } = interaction;
 
-		if (commandName === 'search') {
+		if (commandName === 'weather' || commandName === 'search' ) {
 			const query = interaction.options.getString("search")
 			searchCom(query, interaction)
-		} else if (commandName === "saved") {
+		} else if (commandName === "mylocations" || commandName === 'saved' ) {
 			const user = interaction.user.id
 			savedcom(user, interaction)
 		}
@@ -132,7 +134,7 @@ async function savedcom(user, interaction) {
 				type: 2,
 				label: "Edit Saved Locations",
 				style: 5,
-				url: web.url
+				url: "https://discord.com/oauth2/authorize?client_id=" + config.client + "&redirect_uri=" + process.env['W_URL'] + "/login&response_type=token&scope=identify"
 			}
 			comp.push(editloc)
 			const results = {
@@ -170,7 +172,7 @@ async function savedcom(user, interaction) {
 									type: 2,
 									label: "Add Locations",
 									style: 5,
-									url: web.url
+									url: "https://discord.com/oauth2/authorize?client_id=" + config.client + "&redirect_uri=" + process.env['W_URL'] + "/login&response_type=token&scope=identify"
 								}
 							]
 						}
@@ -208,9 +210,15 @@ client.on("messageCreate", (message) => {
 	}
 })
 
-client.login(config.token);
 
 process.on('uncaughtException', function(err) {
 	console.log("BOT: ERROR");
 	console.error(err);
+});
+
+client.login(config.token);
+client.on('debug', (message) => {
+	if (configFile.debug === true || configFile.debug === "true") {
+		console.log(message)
+	}
 });
